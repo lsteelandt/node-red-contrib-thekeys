@@ -44,9 +44,9 @@ The node can receive 3 commands on its input. Commands are strings with this all
 ### output n°1
 First output, outputs JSON object containing the command posted and its result in this forrmat
 
-```json
+```
 { 
-"command": open or closed or locker_status,
+"command": "open" or "closed" or "locker_status",
 "status": a string describing the lock state or, in case of error, the string return by the http post command to gateway
 }
 ```
