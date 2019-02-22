@@ -7,6 +7,9 @@ It's compose of :
 - 1 configuration node `thekeys-gateway` that contains properties of the gateway use to pilot locks. 
 - 1 node `thekeys-lock` that represent a lock to remotly pilot
 
+# requirements
+Thispackage depends on `crypto-js` and `request`nodes.
+
 # thekeys-gateway
 The configuration contains 4 properties :
 
@@ -20,7 +23,7 @@ The configuration contains 4 properties :
 This will avoid unusefull url call to gateway and then will not charge it unusefully.
 If this property is not checked (se to false), command will be post to gateway unconditionely.
   
-# thekeys-lock
+# thekeys-lock 
 
 ## properties
 
@@ -44,9 +47,9 @@ The node can receive 3 commands on its input. Commands are strings with this all
 ### output n°1
 First output, outputs JSON object containing the command posted and its result in this forrmat
 
-```json
+```
 { 
-"command": open or closed or locker_status,
+"command": "open" or "closed" or "locker_status",
 "status": a string describing the lock state or, in case of error, the string return by the http post command to gateway
 }
 ```
