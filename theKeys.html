@@ -1,0 +1,123 @@
+
+<!--
+                     thekeys-gateway 
+-->
+<script type="text/javascript">
+	RED.nodes.registerType('thekeys-gateway', {
+		category: 'config',
+		defaults: {
+			name: {value:"",required:true},
+			host: {value:"thekeys.local",required:true},
+            port: {value:"",required:false},
+            checkState:{value:false,required:false}
+        },
+        paletteLabel: "thekeys-gateway",
+		label: function() {
+			return this.name;
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="thekeys-gateway">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-host"><i class="fa fa-globe"></i> Host</label>
+        <input type="text" id="node-config-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port"><i class="fa fa-plug"></i> Port</label>
+        <input type="text" id="node-config-input-port">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-checkState"><i class="fa fa-check-circle"></i>Use memorized state</label>
+        <input type="checkbox" id="node-config-input-checkState">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="thekeys-gateway">
+    <p>Configuration node for communication with theKeys Gateway.</p>
+	<p></p>
+	<b>Configuration</b>
+    <ul>
+        <li><b>Name :</b> Specify a name for the configuration node</li>
+        <li><b>Host :</b> Specify the hostname or ip address of theKeys Gateway</li>
+        <li><b>Port :</b> (Optionally) Specify the ip port of Gateway</li>
+        <li><b>Check State :</b><p>Specify if the node will consider the memorized theKey state (opened or closed) to avoid to send an open/close order if lock already opened/closed</li>
+        if unchecked, commands will aways be sent to the gateway despite the state of the lock. 
+        if checked and an open(or close) command is sent while the lock state is opened (or closed), then the command will be transformed to a lock_status command.         
+   	 </ul>
+</script>
+
+
+<!--
+                     thekeys-lock
+-->
+
+<script type="text/javascript">
+	RED.nodes.registerType('thekeys-lock', {
+		category: 'home automation',
+		color: '#a6bbcf',
+		defaults: {
+			name: {value:"",required:false},
+			controller: {value:"", type:"thekeys-gateway", required:true},
+			identifier: {value:"",required:true},
+            sharecode: {value:"",required:true},
+            periodReadingState: {value:300,required:false,validate: /* RED.validators.number() } */
+                function(v) {
+                    //this.log("period = "+v);
+                    return (v > 30) } }
+                
+                },
+              
+        inputs:1,
+        outputs:2,
+        icon: "icons/node-red-contrib-thekeys.png",
+        label: function() {
+            return this.name||"thekeys-lock";
+         }
+	});
+</script>
+
+<script type="text/x-red" data-template-name="thekeys-lock">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+  <div class="form-row">
+        <label for="node-input-controller"><i class="fa fa-globe"></i> Gateway</label>
+        <input type="text" id="node-input-controller">
+    </div>
+    <div class="form-row">
+        <label for="node-input-identifier"><i class="fa fa-hashtag"></i> Lock ID</label>
+        <input type="text" id="node-input-identifier">
+    </div> 
+    <div class="form-row">
+        <label for="node-input-sharecode"><i class="fa fa-link"></i> Lock Share code</label>
+        <input type="text" id="node-input-sharecode">
+    </div> 
+    <div class="form-row">
+        <label for="node-input-periodReadingState"><i class="fa fa-hourglass-o"></i>State reading period</label>
+        <input type="text" id="node-input-periodReadingState">
+    </div> 
+
+</script>
+
+<script type="text/x-red" data-help-name="thekeys-lock">
+    <p>Configuration node to remotly command Locks through theKeys Gateway.</p>
+	<p></p>
+	<b>Configuration</b>
+    <ul>
+        <li><b>Name :</b> Specify a name for the configuration node</li>
+        <li><b>Lock ID :</b><p>ID of lock to command</p>
+            <p>It correspond to the "ID serrure" stored in the table you can obtain in this url https://api.the-keys.fr/fr/compte/serrure</p>
+        </li>
+        <li><b>Share code :</b><p>Code of sharing between Gateway and Lock.</p>
+            <p>Code obtain in you api.the-keys account at  https://api.the-keys.fr/fr/compte/partage/accessoire/<gateway ID>/get </p>
+        </li>
+        <li><b>State reading period :</b> Specify a delay in second between each periodicly state reading of the lock. Default value is 300 sec (5mins). Minimum value is 30sec</li>       
+   	 </ul>
+</script>
+

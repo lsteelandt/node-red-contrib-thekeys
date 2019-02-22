@@ -1,0 +1,19 @@
+{
+    "name": "node-red-contrib-thekey",
+    "version": "0.2.0",
+    "description": "Permet de piloter des serrures theKeys",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Luc STEELANDT",
+    "license": "ISC",
+    "node-red": {
+        "nodes": {
+            "thekeys": "theKeys.js"
+        }
+    },
+    "dependencies": {
+        "crypto-js": "^3.1.9-1"
+    }
+}
