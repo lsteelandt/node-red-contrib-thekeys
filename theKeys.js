@@ -33,19 +33,20 @@ module.exports = function(RED) {
   
         function sendCommandToGateway(command)
         {
-            //node.log("dans sendCommandToGateway");
-			//node.log("name="+node.name+" identifier="+node.identifier+" sharecode="+node.sharecode +"command="+command);
+            node.log("dans sendCommandToGateway");
+			node.log("name="+node.name+" identifier="+node.identifier+" sharecode="+node.sharecode +"command="+command+" processing command ?="+ProcessingCommand);
 			if(ProcessingCommand==false)
 			{
 				ProcessingCommand=true;
 				if ( command != undefined )
 				{	
-					node.log("sendCommandToGateway thekeysGateway.checkState="+thekeysGateway.checkState);
+					node.status({fill:"yellow", shape: "ring", text: "processing"	});
+					node.log("sendCommandToGateway thekeysGateway.checkState="+thekeysGateway.checkState+"  lockState="+lockState+"   command="+command);
 					//Check if the Gateway is configured to allowed posting command without considering current state of Lock
 					// and control if the command try to send a unusefull command (open to an opened lock, close to a closed lock)
 					if ( thekeysGateway.checkState)
 					{
-						//if an usefull command is ordered, then the command is transformed to a get status command
+						//if an unusefull command is ordered, then the command is transformed to a get status command
 						if ( (command=="open" && lockState=="opened") || (command=="close" && lockState=="closed") )
 							command="locker_status";
 					}
