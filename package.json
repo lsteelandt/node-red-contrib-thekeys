@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-thekey",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Node to pilot theKeys locks through theKeys Gateway (https://store.the-keys.fr/)",
     "main": "index.js",
     "scripts": {
