@@ -32,7 +32,7 @@
         <input type="text" id="node-config-input-port">
     </div>
     <div class="form-row">
-        <label for="node-config-input-checkState"><i class="fa fa-check-circle"></i>Use memorized state</label>
+        <label for="node-config-input-checkState"><i class="fa fa-check-circle"></i>Check Stored State</label>
         <input type="checkbox" id="node-config-input-checkState">
     </div>
 </script>
@@ -45,7 +45,7 @@
         <li><b>Name :</b> Specify a name for the configuration node</li>
         <li><b>Host :</b> Specify the hostname or ip address of theKeys Gateway</li>
         <li><b>Port :</b> (Optionally) Specify the ip port of Gateway</li>
-        <li><b>Check State :</b><p>Specify if the node will consider the memorized theKey state (opened or closed) to avoid to send an open/close order if lock already opened/closed</li>
+        <li><b>Check Stored State :</b><p>Specify if the node will consider the memorized theKey state (opened or closed) to avoid to send an open/close order if lock already opened/closed</li>
         if unchecked, commands will aways be sent to the gateway despite the state of the lock. 
         if checked and an open(or close) command is sent while the lock state is opened (or closed), then the command will be transformed to a lock_status command.         
    	 </ul>
