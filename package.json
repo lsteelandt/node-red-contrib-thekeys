@@ -9,6 +9,7 @@
     "repository": "github:lsteelandt/node-red-contrib-thekeys",
     "author": "Luc STEELANDT",
     "license": "ISC",
+    "keywords": [ "node-red","theKeys","Lock","Domotique" ],
     "node-red": {
         "nodes": {
             "thekeys": "theKeys.js"
