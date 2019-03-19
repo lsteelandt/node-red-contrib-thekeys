@@ -38,7 +38,7 @@ module.exports = function(RED) {
 			if(ProcessingCommand==false)
 			{
 				ProcessingCommand=true;
-				if ( command != undefined )
+				if (thekeysGateway && command != undefined )
 				{	
 					node.status({fill:"yellow", shape: "ring", text: "processing"	});
 					node.log("sendCommandToGateway thekeysGateway.checkState="+thekeysGateway.checkState+"  lockState="+lockState+"   command="+command);
@@ -114,8 +114,8 @@ module.exports = function(RED) {
 				else
 				{
 					// no command specified !
-					node.status({fill:"red", shape: "ring", text: "no command specified"});
-					return "onInput: no command specified";
+					node.status({fill:"red", shape: "ring", text: "no command specified or gateway not setup in config node"});
+					return "onInput: no command specified or gateway not setup in config node";
 				}
 
 				ProcessingCommand=false;
